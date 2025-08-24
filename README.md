@@ -18,7 +18,6 @@
 <p align="center">
   A playful side project built with <strong>Vue 3</strong>, <strong>TypeScript</strong>, and <strong>Netlify Functions</strong> that takes your raw, angry rants (like “some jerk stole my ice cream from the fridge”) and magically rewrites them into diplomatic, professional emails.
 </p>
-<br />
 <p align="center">
   Powered by <strong>Google’s Gemini API</strong>, this tool is half joke, half actually-useful — perfect for when you need to vent but still keep your job.
 </p>
@@ -80,17 +79,6 @@ npm install</code></pre>
 
 <hr />
 
-<h2>🛠 How It Works</h2>
-<ul>
-  <li><code>ChatDemo.vue</code>: Captures user input, sends to the Netlify function, renders the Markdown response.</li>
-  <li><code>chat.js</code>: Takes message, forwards it to Gemini (using <code>process.env.GEMINI_API_KEY</code>), returns JSON.</li>
-  <li><code>markdown.ts</code>: Converts Markdown string to HTML using <code>marked.parse()</code>.</li>
-</ul>
-
-<hr />
-
-<hr />
-
 <h2>📌 Notes</h2>
 <ul>
   <li>No persistent history — refresh equals reset.</li>
@@ -102,21 +90,25 @@ npm install</code></pre>
 
 <h2>🎯 Example</h2>
 <strong>Input:</strong> <br/>
-<code>
-  "who the f kicked my dog"
-</code>
+<i>who the f kicked my dog</i>
 <strong>Output:</strong> <br/>
 
 <p>
+  <i>
   Subject: Inquiry Regarding an Incident
 
   To Whom It May Concern,
 
   I am writing to inquire about an incident that occurred earlier today. I understand that there may have been a situation involving my dog, and I would appreciate any information you can provide regarding what happened.
-
+  </i>
+</p>
+<hr />
+<h2>🤔 Why?</h2>
+<p>
+  Because sometimes the only thing between you and an HR meeting is a polite email generator.
 </p>
 
 <h2>📜 License</h2>
 <p>
-MIT. Steal it, tweak it, just don’t come crying when your API quota disappears.  
+  MIT License. Free to rage and rewrite.
 </p>
