@@ -1,26 +1,58 @@
 <template>
-  <div class="converter-demo">
-    <h2>Rage-to-Polite Converter</h2>
+  <div class="max-w-7xl mx-auto">
+    <div class="mx-auto text-4xl p-4 font-normal text-neutral-600 dark:text-neutral-400">
+      Rage to
+      <FlipWords
+        :words="['Polite', 'Smart', 'Courtly', 'Genteel', 'Swish', 'Urbane', 'Gentlemanlike', 'Decently', 'Civil-spoken']"
+        :duration="3000" class="text-4xl !text-primary" />
+      <div class="w-full"> Email Converter</div>
+    </div>
 
     <div class="grid grid-cols-2 gap-4">
       <!-- Rage input -->
       <div class="p-4 border rounded">
-        <h3 class="font-bold mb-2">Your Rage</h3>
-        <textarea v-model="input" placeholder="Type your angry message here..."
-          class="w-full h-40 p-2 border rounded"></textarea>
+        <h3 class="font-bold mb-2">Your Rage <v-icon name="hi-solid-fire" animation="ring" fill="red" /> </h3>
+        
+        <Textarea v-model="input" placeholder="Type your angry message here..."></Textarea>
 
         <!-- Tone selector -->
         <label class="block mt-2 text-sm font-medium">Tone</label>
-        <select v-model="tone" class="w-full border rounded p-1">
+        <!-- <select v-model="tone" class="w-full border rounded p-1">
           <option value="polite and professional">Polite</option>
           <option value="diplomatic">Diplomatic</option>
           <option value="overly apologetic">Overly Apologetic</option>
           <option value="comically groveling">Comically Groveling</option>
-        </select>
+        </select> -->
+        <Select v-model="tone" defaultValue='banana'>
+          <SelectTrigger class="w-full">
+            <SelectValue placeholder="Banana" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem v-for="tone in tones" :key="tone.value" :value="tone.value">{{ tone.label }}</SelectItem>
+              <!-- <SelectItem value="apple">
+                Apple
+              </SelectItem>
+              <SelectItem value="banana">
+                Banana
+              </SelectItem>
+              <SelectItem value="blueberry">
+                Blueberry
+              </SelectItem>
+              <SelectItem value="grapes">
+                Grapes
+              </SelectItem>
+              <SelectItem value="pineapple">
+                Pineapple
+              </SelectItem> -->
+            </SelectGroup>
+          </SelectContent>
+        </Select>
 
-        <button @click="convert" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
+        <!-- <button @click="convert" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
           Convert
-        </button>
+        </button> -->
+        <Button @click="convert" class="mt-4">Convert</Button>
       </div>
 
       <!-- Polite output -->
@@ -41,10 +73,29 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { marked } from "marked";
+import { Button } from "@/components/ui/button";
+import { Textarea } from '@/components/ui/textarea'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { FlipWords } from "@/components/ui/flip-words";
 
 const input = ref("");
 const output = ref("");
 const tone = ref("polite and professional");
+
+const tones = [
+  { value: "polite and professional", label: "Polite" },
+  { value: "diplomatic", label: "Diplomatic" },
+  { value: "overly apologetic", label: "Overly Apologetic" },
+  { value: "comically groveling", label: "Comically Groveling" },
+];
 
 async function convert() {
   if (!input.value.trim()) return;
