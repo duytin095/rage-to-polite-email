@@ -81,16 +81,18 @@ npm install</code></pre>
 
 <h2>🎯 Example</h2>
 <strong>Input:</strong> <br/>
-<i>who the f kicked my dog</i> <br />
+<i>"some asshole stole my ice cream from the fridge"</i> <br />
 <strong>Output:</strong> <br/>
-
 <p>
   <i>
-  Subject: Inquiry Regarding an Incident
+  Subject: Regarding a missing snack in the refrigerator 
+  Dear Team,  
 
-  To Whom It May Concern,
+  I hope this message finds you well. I wanted to bring up a small matter — it seems that an item I left in the shared fridge has gone missing. While I’m sure it was unintentional, I’d appreciate everyone’s help in keeping our shared space respectful.  
 
-  I am writing to inquire about an incident that occurred earlier today. I understand that there may have been a situation involving my dog, and I would appreciate any information you can provide regarding what happened.
+  Thank you for your understanding.  
+  Best regards,  
+  [Your Name]
   </i>
 </p>
 <hr />
