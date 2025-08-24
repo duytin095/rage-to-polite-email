@@ -79,18 +79,9 @@ npm install</code></pre>
 
 <hr />
 
-<h2>📌 Notes</h2>
-<ul>
-  <li>No persistent history — refresh equals reset.</li>
-  <li>Use Gemini within free-tier limits to avoid silent failure.</li>
-  <li>TypeScript may complain about <code>marked.parse()</code>; casting with <code>as string</code> silences it.</li>
-</ul>
-
-<hr />
-
 <h2>🎯 Example</h2>
 <strong>Input:</strong> <br/>
-<i>who the f kicked my dog</i>
+<i>who the f kicked my dog</i> <br />
 <strong>Output:</strong> <br/>
 
 <p>
