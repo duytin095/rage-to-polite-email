@@ -1,5 +1,5 @@
 <template>
-  <div class="relative inline-block px-2">
+  <div class="relative inline-block">
     <Transition
       @after-enter="$emit('animationStart')"
       @after-leave="$emit('animationComplete')"

@@ -1,28 +1,29 @@
 <template>
-  <div class="max-w-7xl mx-auto">
-    <div class="mx-auto text-4xl p-4 font-normal text-neutral-600 dark:text-neutral-400">
-      Rage to
-      <FlipWords
-        :words="['Polite', 'Smart', 'Courtly', 'Genteel', 'Swish', 'Urbane', 'Gentlemanlike', 'Decently', 'Civil-spoken']"
-        :duration="3000" class="text-4xl !text-primary" />
-      <div class="w-full"> Email Converter</div>
+  <Toaster />
+  <div class="md:max-w-7xl max-w-full mx-auto">
+    <div class="flex md:flex-row flex-col items-center md:justify-between">
+      <div class="text-4xl md:p-12 font-normal text-neutral-600 dark:text-neutral-400 self-start px-4">
+        Rage to
+        <br class="md:hidden"/>
+        <FlipWords
+          :words="['Polite', 'Smart', 'Courtly', 'Genteel', 'Swish', 'Urbane', 'Gentlemanlike', 'Decently', 'Civil-spoken']"
+          :duration="3000" class="text-4xl !text-primary" />
+        <div class=""> Email Converter</div>
+      </div>
+      <div class=" md:p-12 py-2 px-4 md:w-auto w-full">
+        <LightDarkToggler class="w-full"/>
+      </div>
     </div>
 
-    <div class="grid grid-cols-2 gap-4">
-      <!-- Rage input -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:px-12 px-4">
       <div class="p-4 border rounded">
-        <h3 class="font-bold mb-2">Your Rage <v-icon name="hi-solid-fire" animation="ring" fill="red" /> </h3>
-        
-        <Textarea v-model="input" placeholder="Type your angry message here..."></Textarea>
+        <!-- Rage input -->
+        <Label class="font-bold mb-2" for="message">Your Rage <v-icon name="hi-solid-fire" animation="ring"
+            fill="red" /></Label>
+        <Textarea id="message" v-model="input" placeholder="Type your angry message here..."></Textarea>
 
         <!-- Tone selector -->
-        <label class="block mt-2 text-sm font-medium">Tone</label>
-        <!-- <select v-model="tone" class="w-full border rounded p-1">
-          <option value="polite and professional">Polite</option>
-          <option value="diplomatic">Diplomatic</option>
-          <option value="overly apologetic">Overly Apologetic</option>
-          <option value="comically groveling">Comically Groveling</option>
-        </select> -->
+        <Label class="mt-3 mb-2 text-sm font-medium">Tone</Label>
         <Select v-model="tone" defaultValue='banana'>
           <SelectTrigger class="w-full">
             <SelectValue placeholder="Banana" />
@@ -30,41 +31,21 @@
           <SelectContent>
             <SelectGroup>
               <SelectItem v-for="tone in tones" :key="tone.value" :value="tone.value">{{ tone.label }}</SelectItem>
-              <!-- <SelectItem value="apple">
-                Apple
-              </SelectItem>
-              <SelectItem value="banana">
-                Banana
-              </SelectItem>
-              <SelectItem value="blueberry">
-                Blueberry
-              </SelectItem>
-              <SelectItem value="grapes">
-                Grapes
-              </SelectItem>
-              <SelectItem value="pineapple">
-                Pineapple
-              </SelectItem> -->
             </SelectGroup>
           </SelectContent>
         </Select>
-
-        <!-- <button @click="convert" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
-          Convert
-        </button> -->
-        <Button @click="convert" class="mt-4">Convert</Button>
+        <Button @click="convert" class="mt-4 w-full md:w-auto">Convert</Button>
       </div>
 
       <!-- Polite output -->
       <div class="p-4 border rounded relative">
-        <h3 class="font-bold mb-2">Polite Output</h3>
-        <div v-if="output" class="prose border p-2 rounded bg-gray-50" v-html="renderMarkdown(output)"></div>
+        <div class="flex  items-center justify-between">
+          <h3 class="font-bold mb-2">Polite Output </h3>
+          <Button variant="outline" @click="copyToClipboard"> Copy </Button>
+        </div>
+        <div v-if="output" class="prose border p-2 mt-2 rounded bg-gray-50" v-html="renderMarkdown(output)"></div>
         <div v-else class="text-gray-400 italic">No output yet...</div>
 
-        <button v-if="output" @click="copyToClipboard"
-          class="absolute top-2 right-2 bg-gray-200 px-2 py-1 rounded text-sm">
-          Copy
-        </button>
       </div>
     </div>
   </div>
@@ -85,6 +66,11 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { FlipWords } from "@/components/ui/flip-words";
+import { Label } from "@/components/ui/label";
+import { Toaster } from '@/components/ui/sonner'
+import 'vue-sonner/style.css'
+import { toast } from 'vue-sonner'
+import LightDarkToggler from "./components/ui/LightDarkToggler.vue";
 
 const input = ref("");
 const output = ref("");
@@ -117,7 +103,7 @@ async function copyToClipboard() {
   if (!output.value) return;
   try {
     await navigator.clipboard.writeText(output.value);
-    alert("Copied to clipboard!");
+    toast('Copied to clipboard')
   } catch (err) {
     console.error("Failed to copy", err);
   }
