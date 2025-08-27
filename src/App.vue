@@ -61,7 +61,7 @@
           <h3 class="font-bold mb-2">Polite Output </h3>
           <Button v-if="output" variant="outline" @click="copyToClipboard"> Copy </Button>
         </div>
-        <div v-if="output" class="prose border p-2 mt-2 rounded bg-gray-50" v-html="renderMarkdown(output)"></div>
+        <div v-if="output" class="prose border p-2 mt-2 rounded  dark:bg-gray-800" v-html="renderMarkdown(output)"></div>
         <div v-else class="text-gray-400 italic">No output yet...</div>
 
       </div>
