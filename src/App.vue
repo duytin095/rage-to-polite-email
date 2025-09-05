@@ -1,30 +1,9 @@
 <template>
   <Toaster />
-
-   <div
-      class="absolute inset-0 z-0"
-      style="
-        background-image: radial-gradient(
-          circle at top center,
-          rgba(70, 130, 180, 0.5),
-          transparent 70%
-        );
-        filter: blur(80px);
-        background-repeat: no-repeat;
-      "
-    ></div>
-
-
+  <Background />
   <div class="md:max-w-7xl min-h-screen max-w-full mx-auto relative z-10">
     <div class="flex md:flex-row flex-col items-center md:justify-between">
-      <div class="text-4xl md:p-12 font-normal text-neutral-600 dark:text-neutral-400 self-start px-4">
-        Rage to
-        <br class="md:hidden" />
-        <FlipWords
-          :words="['Polite', 'Smart', 'Courtly', 'Genteel', 'Swish', 'Urbane', 'Gentlemanlike', 'Decently', 'Civil-spoken']"
-          :duration="3000" class="text-4xl !text-primary" />
-        <div class=""> Email Converter</div>
-      </div>
+      <MyFlipWords />
       <div class=" md:p-12 py-2 px-4 md:w-auto w-full">
         <LightDarkToggler class="w-full" />
       </div>
@@ -35,8 +14,7 @@
         <!-- Rage input -->
         <Label class="font-bold mb-2" for="message">Your Rage <v-icon name="hi-solid-fire" animation="ring"
             fill="red" /></Label>
-        <Textarea id="message" v-model="input" 
-          :placeholder="displayedText">
+        <Textarea id="message" v-model="input" :placeholder="displayedText">
         </Textarea>
 
         <!-- Tone selector -->
@@ -52,7 +30,8 @@
           </SelectContent>
         </Select>
         <!-- <Button>Convert</Button> -->
-        <RippleButton rippleColor="#ADD8E6" variant="outline" class="mt-4 w-full md:w-auto" @click="convert"> Convert </RippleButton>
+        <RippleButton rippleColor="#ADD8E6" variant="outline" class="mt-4 w-full md:w-auto" @click="convert"> Convert
+        </RippleButton>
       </div>
 
       <!-- Polite output -->
@@ -61,7 +40,8 @@
           <h3 class="font-bold mb-2">Polite Output </h3>
           <Button v-if="output" variant="outline" @click="copyToClipboard"> Copy </Button>
         </div>
-        <div v-if="output" class="prose border p-2 mt-2 rounded  dark:bg-gray-800" v-html="renderMarkdown(output)"></div>
+        <div v-if="output" class="prose border p-2 mt-2 rounded  dark:bg-gray-800" v-html="renderMarkdown(output)">
+        </div>
         <div v-else class="text-gray-400 italic">No output yet...</div>
 
       </div>
@@ -79,38 +59,32 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { FlipWords } from "@/components/ui/flip-words";
+import MyFlipWords from "@/components/MyFlipWords.vue";
 import { Label } from "@/components/ui/label";
 import { Toaster } from '@/components/ui/sonner'
 import 'vue-sonner/style.css'
 import { toast } from 'vue-sonner'
 import LightDarkToggler from "./components/ui/LightDarkToggler.vue";
 import { RippleButton } from "./components/ui/ripple-button";
+import Background from "./components/Background.vue";
 
 
-
+import { examples } from './examples.ts';
 
 const input = ref("");
 const output = ref("");
 const tone = ref("polite and professional");
 
-const placeholders = [
-  "This website sucks, who make this garbage?",
-  "Some jerk ate my ice cream, its was in the fridge this morning",
-  "Smoking in somewhere else bastard, I can stand with that smell every day",
-  "I know that's some jerk in marketing department that stole my ice cream from the fridge",
-];
 
 const displayedText = ref("");
 let currentIndex = 0;
 let charIndex = 0;
 
 function typeEffect() {
-  const current = placeholders[currentIndex];
+  const current = examples[currentIndex];
   if (charIndex < current.length) {
     displayedText.value += current[charIndex];
     charIndex++;
@@ -128,7 +102,7 @@ function deleteEffect() {
     setTimeout(deleteEffect, 50); // delete speed
   } else {
     // move to next placeholder
-    currentIndex = (currentIndex + 1) % placeholders.length;
+    currentIndex = (currentIndex + 1) % examples.length;
     setTimeout(typeEffect, 500);
   }
 }
