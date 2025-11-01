@@ -1,4 +1,6 @@
-<h1 align="center">Rage-to-Polite Email Converter ✉️😤→🙂</h1>
+<a href="https://rage-to-polite-email.netlify.app/">
+  <h1 align="center">Rage-to-Polite Email Converter ✉️😤→🙂</h1>
+</a>
 
 <p align="center">
   <a href="https://app.netlify.com/sites/ai-chat-app-demo-dt/deploys">
@@ -21,7 +23,7 @@
 <p align="center">
   Powered by <strong>Google’s Gemini API</strong>, this tool is half joke, half actually-useful — perfect for when you need to vent but still keep your job.
 </p>
-<a href="https://rage-to-polite-email.netlify.app/">Give it a try</a>
+
 
 <hr />
 
