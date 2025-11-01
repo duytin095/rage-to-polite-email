@@ -21,7 +21,7 @@
 <p align="center">
   Powered by <strong>Google’s Gemini API</strong>, this tool is half joke, half actually-useful — perfect for when you need to vent but still keep your job.
 </p>
-<a href="https://rage-to-polite-email.netlify.app/"></a>
+<a href="https://rage-to-polite-email.netlify.app/">Give it a try</a>
 
 <hr />
 
